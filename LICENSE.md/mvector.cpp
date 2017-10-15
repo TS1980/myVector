@@ -1,37 +1,34 @@
-class Array
+template<typename T>
+class mvector
 {
-	int* arr;
+	T* arr;
 	int size;
 public:
 	// Default constructor
-	Array()
+	mvector()
 	{
 		arr = nullptr;
 		size = 0;
 	}
 
 	// Copy constructor
-	Array(Array &obj)
+	mvector(mvector &obj)
 	{
 		size = obj.size;
-		arr = new int[size];
-		memcpy(arr, obj.arr, size * sizeof(int));
+		arr = new T[size];
+		memcpy(arr, obj.arr, size * sizeof(T));
 	}
 
 	// Destructor
-	~Array()
+	~mvector()
 	{
 		delete[] arr;
 	}
 
-	void add(int data)
+	void add(T data)
 	{
-		int* tmp = new int[size + 1];
-		//for (int i = 0; i < size; i++)
-		//{
-		//	tmp[i] = arr[i];
-		//}
-		memcpy(tmp, arr, size * sizeof(int));
+		T* tmp = new T[size + 1];
+		memcpy(tmp, arr, size * sizeof(T));
 		delete[] arr;
 		arr = tmp;
 		arr[size] = data;
@@ -40,7 +37,7 @@ public:
 
 	void remove(int index)
 	{
-		int* tmp = new int[size - 1];
+		T* tmp = new T[size - 1];
 		int j = 0;
 		for (int i = 0; i < size; i++)
 		{
@@ -54,10 +51,10 @@ public:
 		size--;
 	}
 
-	void insert(int data, int index)
+	void insert(T data, int index)
 	{
 		size++;
-		int* tmp = new int[size];
+		T* tmp = new T[size];
 		int j = 0;
 		for (int i = 0; i < size; i++)
 		{
@@ -71,7 +68,7 @@ public:
 		arr[index] = data;
 	}
 
-	int select(int index)
+	T select(int index)
 	{
 		if (index >= 0 && index < size)
 		{
@@ -91,7 +88,7 @@ public:
 	{
 		return size;
 	}
-	
+
 	void print()
 	{
 		for (int i = 0; i < size; i++)
